@@ -1,7 +1,13 @@
 Tictattertot::Application.routes.draw do
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}
 
-  resources :games, :only => [:index, :show, :create, :edit], :path_names => {:edit => :play}
+  resources :games, :only => [:index, :show, :create, :edit, :update], :path_names => {:edit => :play, :show => :spectate} do
+    member do
+      get 'join'
+    end
+
+    get 'joingame', :on => :collection
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -11,6 +11,9 @@
   <span>Tic Tatter Tot</span>
   <nav><%= current_user.nil? ? link_to('Login', new_user_session_path) : link_to('Logout', destroy_user_session_path, :method => :delete) %></nav>
 </header>
+<% flash.each do |name, msg| %>
+    <%= content_tag :div, msg, class: name %>
+<% end %>
 
 <%= yield %>
 
