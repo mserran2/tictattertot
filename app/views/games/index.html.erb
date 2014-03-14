@@ -5,12 +5,17 @@
   <% end %>
   <div id="my_games">
     <h2>My Games</h2>
-    @current_user.games
+    <% current_user.games.each do |game| %>
+        <div><%= "Game ##{game.id} Vs. #{game.users.first.first_name} #{game.users.first.last_name[0].upcase}." %></div>
+    <% end %>
   </div>
   <% end %>
 
   <div id="open_games">
     <h2>Open Games</h2>
+    <% @open_games.each do |game| %>
+        <div><%= "Game ##{game.id} Vs. #{game.users.first.first_name} #{game.users.first.last_name[0].upcase}." %></div>
+    <% end %>
   </div>
 
   <div id="active_games">

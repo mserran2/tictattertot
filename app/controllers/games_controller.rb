@@ -4,6 +4,8 @@ class GamesController < ApplicationController
 
   def index
     @games = Game.all
+    @open_games = Game.open
+    @recent_games = Game.recent
     @current_user = current_user
   end
 
