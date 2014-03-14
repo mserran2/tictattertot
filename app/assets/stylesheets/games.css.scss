@@ -1,0 +1,58 @@
+// Place all the styles related to the games controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#game_board{
+  max-width: 600px;
+  margin: 0 auto;
+  .board_box{
+    width:198px;
+    height:198px;
+    border:1px solid transparent;
+    float:left;
+    font-size: 133px;
+    text-align: center;
+    line-height: 200px;
+    &.p0:before{
+      content: "X";
+    }
+    &.p1:before{
+      content: "O";
+    }
+  }
+  .c00{
+    border-bottom-color: #000;
+    border-right-color: #000;
+  }
+  .c01{
+    border-color: #000;
+    border-top-color: transparent;
+  }
+  .c02{
+    border-bottom-color:#000;
+    border-left-color:#000;
+  }
+  .c10{
+    border-color:#000;
+    border-left-color: transparent;
+  }
+  .c11{
+    border-color:#000;
+  }
+  .c12{
+    border-color:#000;
+    border-right-color: transparent;
+  }
+  .c20{
+    border-top-color: #000;
+    border-right-color: #000;
+  }
+  .c21{
+    border-color:#000000;
+    border-bottom:transparent;
+  }
+  .c22{
+    border-left-color: #000;
+    border-top-color:#000;
+  }
+}

@@ -1,0 +1,11 @@
+<section id="player_info">
+<%= "#{game.users.first.email} vs. #{game.users.last.email} " %>
+</section>
+
+<section id="game_board">
+<% game.grid.each_with_index do |row, i| %>
+  <% row.each_with_index do |col, j| %>
+    <div class="board_box <%= "c#{i}#{j}"%> <%= "p#{col}" %>"></div>
+  <% end %>
+<% end %>
+</section>

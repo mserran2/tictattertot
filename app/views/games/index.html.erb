@@ -1,0 +1,23 @@
+<div id="games_index">
+  <% unless @current_user.nil? %>
+  <%= form_for Game.new do |f| %>
+    <%= f.submit %>
+  <% end %>
+  <div id="my_games">
+    <h2>My Games</h2>
+    @current_user.games
+  </div>
+  <% end %>
+
+  <div id="open_games">
+    <h2>Open Games</h2>
+  </div>
+
+  <div id="active_games">
+    <h2>Active Games</h2>
+  </div>
+
+  <div id="recent_games">
+    <h2>Recently Ended Games</h2>
+  </div>
+</div>

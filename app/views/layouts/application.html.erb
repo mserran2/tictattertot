@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Tictattertot</title>
+  <title>Tic-Tatter-Tot</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+<header>
+  <span>Tic Tatter Tot</span>
+  <nav><%= current_user.nil? ? link_to('Login', new_user_session_path) : link_to('Logout', destroy_user_session_path, :method => :delete) %></nav>
+</header>
 
 <%= yield %>
 
