@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  playerx_id: 1
+  playery_id: 1
+  game_grid: MyString
+  game_state: MyString
+  last_id: 1
+  active: false
+
+two:
+  playerx_id: 1
+  playery_id: 1
+  game_grid: MyString
+  game_state: MyString
+  last_id: 1
+  active: false
