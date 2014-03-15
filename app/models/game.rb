@@ -42,6 +42,7 @@ class Game < ActiveRecord::Base
     x = Integer(move[:x])
     y = Integer(move[:y])
     self.toggleColor
+    self.last_id = user.id
     self.grid[x][y] = self.binColor
     if self.last_color
       self.state[:rows][x] += 1

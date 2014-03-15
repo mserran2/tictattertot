@@ -3,15 +3,15 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $ ->
   $('#game_board').on 'click', '.board_box', ->
-    color = "p#{$(@).parent().data('player')}"
-    box = $(@).addClass(color)
+    surface = $(@).closest('.play_surface')
+    box = $(@).addClass("p#{surface.data('player')}")
     $.ajax(
-      url: box.closest('.play_surface').data('gamepath'),
+      url: surface.data('gamepath'),
       data: { move:{x:box.data('x'), y:box.data('y')}}
       type: 'PUT',
       dataType: 'json'
     ).fail(->
-      box.removeClass(color)
+      box.removeClass("p#{surface.data('player')}")
     ).done((data)->
       console.log(data)
     )

@@ -23,15 +23,21 @@ class GamesController < ApplicationController
   end
 
   def edit
-
+   redirect_to game_path(@game) and return if @game.users.where(:id => current_user.id).count.zero?
   end
 
   def update
-    @game.move(current_user, params[:move])
-
-    respond_to do |format|
-      format.html { redirect_to edit_game_path(@game)}
-      format.json { render json: @game }
+    if @game.last_id == current_user.id
+      respond_to do |format|
+        format.html { redirect_to edit_game_path(@game), :notice => "It's not your turn yet!"}
+        format.json { render json: {:error => {:message => "It's not your turn yet!"}}, :status => 422 }
+      end
+    else
+      @game.move(current_user, params[:move])
+      respond_to do |format|
+        format.html { redirect_to edit_game_path(@game)}
+        format.json { render json: @game }
+      end
     end
   end
 

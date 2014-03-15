@@ -1,11 +1,7 @@
 // Place all the styles related to the games controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
-#game_board{
-  max-width: 600px;
-  margin: 0 auto;
-
+.play_surface{
   &.p0 .board_box:hover:before{
     content:"O";
     color:lightgray;
@@ -14,37 +10,42 @@
     content:"X";
     color:lightcoral;
   }
-  .board_box{
-    width:198px;
-    height:198px;
-    border:1px solid #000;
-    float:left;
-    font-size: 133px;
-    text-align: center;
-    line-height: 200px;
-    cursor: pointer;
+  #game_board{
+    max-width: 600px;
+    margin: 0 auto;
 
-    &.p1:before{
-      content: "X" !important;
-      color:maroon !important;
-      transition: all 0.5s ease;
+    .board_box{
+      width:198px;
+      height:198px;
+      border:1px solid #000;
+      float:left;
+      font-size: 133px;
+      text-align: center;
+      line-height: 200px;
+      cursor: pointer;
+
+      &.p1:before{
+        content: "X" !important;
+        color:maroon !important;
+        transition: all 0.5s ease;
+      }
+      &.p0:before{
+        content: "O" !important;
+        color:#000 !important;
+        transition: all 0.5s ease;
+      }
     }
-    &.p0:before{
-      content: "O" !important;
-      color:#000 !important;
-      transition: all 0.5s ease;
+    .c00, .c01, .c02{
+      border-top-color: transparent;
     }
-  }
-  .c00, .c01, .c02{
-    border-top-color: transparent;
-  }
-  .c00, .c10, .c20{
-    border-left-color: transparent;
-  }
-  .c02, .c12, .c22{
-    border-right-color:transparent;
-  }
-  .c20, .c21, .c22{
-    border-bottom-color:transparent;
+    .c00, .c10, .c20{
+      border-left-color: transparent;
+    }
+    .c02, .c12, .c22{
+      border-right-color:transparent;
+    }
+    .c20, .c21, .c22{
+      border-bottom-color:transparent;
+    }
   }
 }

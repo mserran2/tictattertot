@@ -2,7 +2,7 @@
 <%= "#{game.users.first.display_name} vs. #{game.users.size < 2 ? 'Waiting for opponent' : game.users.last.display_name} " %>
 </section>
 
-<section id="game_board" class="p<%= game.userColor(current_user) %>" data-player='<%= game.userColor(current_user) %>'>
+<section id="game_board">
 <% game.grid.each_with_index do |row, i| %>
   <% row.each_with_index do |col, j| %>
     <div class="board_box <%= "c#{i}#{j}"%> <%= "p#{col}" %>" data-x="<%= i %>" data-y="<%= j %>"></div>
