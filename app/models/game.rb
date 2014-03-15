@@ -1,4 +1,5 @@
 class Game < ActiveRecord::Base
+  require 'digest/sha1'
   TYPES = {
       :open => 0,
       :active => 1,
@@ -37,13 +38,25 @@ class Game < ActiveRecord::Base
     end
   end
 
+  def last_token
+    Digest::SHA1.hexdigest "#{self.last_id}"
+  end
+
+  def next_token
+    #find token for player whose up next
+    Digest::SHA1.hexdigest "#{self.users.where.not(:id => self.last_id).pluck(:id).first}"
+  end
+
 
   def move(user, move)
     x = Integer(move[:x])
     y = Integer(move[:y])
+    #update current color and user id
     self.toggleColor
     self.last_id = user.id
+    #update grid
     self.grid[x][y] = self.binColor
+    #check current color and update game state accordingly
     if self.last_color
       self.state[:rows][x] += 1
       self.state[:columns][y] += 1
@@ -51,7 +64,17 @@ class Game < ActiveRecord::Base
       self.state[:rows][x] -= 1
       self.state[:columns][y] -= 1
     end
-
     self.save
+    #send game update
+    Pusher['game_updates'].trigger("game_#{self.id}", {
+        :game => self.as_json(:only => [
+                  :grid,
+                ],:methods => [
+                  :last_token,
+                  :next_token,
+                  :binColor
+                ]),
+        :move => move
+    })
   end
 end

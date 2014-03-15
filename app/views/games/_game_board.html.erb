@@ -9,3 +9,8 @@
   <% end %>
 <% end %>
 </section>
+<script>
+    channel.bind('game_<%= @game.id %>', function(data) {
+        TicTT.processUpdate(data);
+    });
+</script>

@@ -1,3 +1,4 @@
+
 <div class="play_surface p<%= @game.userColor(current_user) %>" data-playtoken="<%= current_user.token %>" data-gamepath="<%= game_path(@game) %>" data-player='<%= @game.userColor(current_user) %>'>
     <%= render :partial => 'game_board', :locals => {:game => @game} %>
 </div>
