@@ -8,6 +8,7 @@ Tictattertot::Application.routes.draw do
 
     get 'joingame', :on => :collection
   end
+  root 'games#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
