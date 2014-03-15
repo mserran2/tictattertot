@@ -1,9 +1,8 @@
 class GamesController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
-  before_filter -> {@game = Game.includes(:users).find(params[:id])}, :only => [:show, :edit, :update, :join]
+  before_filter -> {@game = Game.includes(:player1, :player2).find(params[:id])}, :only => [:show, :edit, :update, :join]
 
   def index
-    @games = Game.all
     @open_games = Game.open
     @recent_games = Game.recent
     @active_games = Game.active
@@ -17,13 +16,13 @@ class GamesController < ApplicationController
     game = Game.create(:grid => Array.new(3) { Array.new(3,-1) },
                 :state => {:rows => Array.new(3, 0), :columns => Array.new(3, 0), :diags => Array.new(3, 0)},
                 :status => Game::TYPES[:open],
-                :user_ids => [current_user.id]
+                :player1 => current_user
     )
     redirect_to edit_game_path(game)
   end
 
   def edit
-   redirect_to game_path(@game) and return if @game.users.where(:id => current_user.id).count.zero?
+   redirect_to game_path(@game) and return unless @game.player?(current_user)
   end
 
   def update

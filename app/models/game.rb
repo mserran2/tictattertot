@@ -13,8 +13,9 @@ class Game < ActiveRecord::Base
 
   serialize :grid
   serialize :state
-  has_many :game_players
-  has_many :users, :through => :game_players
+
+  belongs_to :player1, :class_name => 'User', :foreign_key => 'player1_id'
+  belongs_to :player2, :class_name => 'User', :foreign_key => 'player2_id'
 
   def join(user)
     self.users << user
@@ -44,9 +45,12 @@ class Game < ActiveRecord::Base
 
   def next_token
     #find token for player whose up next
-    Digest::SHA1.hexdigest "#{self.users.where.not(:id => self.last_id).pluck(:id).first}"
+    Digest::SHA1.hexdigest "#{self.player1_id == self.last_id ? self.player2_id : self.player1_id}"
   end
 
+  def player?(player)
+    self.player1 == player || self.player2 == player
+  end
 
   def move(user, move)
     x = Integer(move[:x])

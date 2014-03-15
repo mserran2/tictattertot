@@ -5,8 +5,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :game_players
-  has_many :games, :through => :game_players
+  has_many :hosted_games, :class_name => 'Game', :foreign_key => :player1_id
+  has_many :joined_games, :class_name => 'Game', :foreign_key => :player2_id
 
   def display_name
     "#{self.first_name.capitalize} #{self.last_name[0].upcase}."
@@ -14,6 +14,10 @@ class User < ActiveRecord::Base
 
   def token
     Digest::SHA1.hexdigest "#{self.id}"
+  end
+
+  def games
+    Game.where('player1_id = ? OR player2_id = ?',self.id, self.id)
   end
 
 end
