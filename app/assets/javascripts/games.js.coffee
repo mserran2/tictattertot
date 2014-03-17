@@ -2,12 +2,34 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 window.TicTT = {}
+#Status hash also defined in game.rb
+TicTT.status =
+  open: 0,
+  active: 1,
+  draw: 2,
+  ended: 3
+
 TicTT.processUpdate = (data)->
   #console.log(data)
-  $('#game_board').children(".c#{data.move.x}#{data.move.y}").addClass("p#{data.game.binColor}")
-$ ->
+  surface = $('.play_surface')
+  board = surface.find('#game_board')
+  if data.move?
+    board.children(".c#{data.move.x}#{data.move.y}").addClass("p#{data.game.binColor} locked")
+
+  switch data.game.status
+    when TicTT.status.active
+      if 'start' of data
+        $('#player_info').text(data.start.displayName)
+        surface.addClass("p#{data.start.color}")
+      if data.game.next_token == surface.data('playtoken')
+        surface.addClass("active")
+
+#setup click handler for boxes
+ready = ->
   $('#game_board').on 'click', '.board_box', ->
     surface = $(@).closest('.play_surface')
+    return unless surface.hasClass('active')
+    surface.removeClass('active')
     box = $(@).addClass("p#{surface.data('player')}")
     $.ajax(
       url: surface.data('gamepath'),
@@ -16,7 +38,11 @@ $ ->
       dataType: 'json'
     ).fail(->
       box.removeClass("p#{surface.data('player')}")
+      surface.removeClass('active')
     ).done((data)->
       #console.log(data)
     )
 
+#ensure compatibility with turbolinks
+$(document).ready(ready)
+$(document).on('page:load', ready)

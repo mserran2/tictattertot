@@ -17,10 +17,8 @@ class Game < ActiveRecord::Base
   belongs_to :player1, :class_name => 'User', :foreign_key => 'player1_id'
   belongs_to :player2, :class_name => 'User', :foreign_key => 'player2_id'
 
-  def join(user)
-    self.users << user
-    self.status = TYPES[:active]
-    self.save
+  def displayName
+    "#{self.player1.display_name} vs. #{self.player2.display_name}"
   end
 
   def binColor
@@ -52,6 +50,18 @@ class Game < ActiveRecord::Base
     self.player1 == player || self.player2 == player
   end
 
+  def join(user)
+    return false if self.status != TYPES[:open]
+    self.player2 = user
+    self.status = TYPES[:active]
+    self.last_id = Random.rand(2).zero? ? self.player1_id : self.player2_id
+    if self.save
+      sendUpdate(:start => {:displayName => self.displayName, :color => self.userColor(user)})
+      return self
+    end
+    false
+  end
+
   def move(user, move)
     x = Integer(move[:x])
     y = Integer(move[:y])
@@ -70,15 +80,21 @@ class Game < ActiveRecord::Base
     end
     self.save
     #send game update
+    sendUpdate(:move => move)
+  end
+
+  protected
+
+  def sendUpdate(options = {})
     Pusher['game_updates'].trigger("game_#{self.id}", {
         :game => self.as_json(:only => [
-                  :grid,
-                ],:methods => [
-                  :last_token,
-                  :next_token,
-                  :binColor
-                ]),
-        :move => move
-    })
+            :grid,
+            :status
+        ],:methods => [
+            :last_token,
+            :next_token,
+            :binColor
+        ])
+    }.merge(options))
   end
 end

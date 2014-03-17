@@ -2,11 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .play_surface{
-  &.p0 .board_box:hover:before{
+  &.p0.active .board_box:hover:before{
     content:"O";
     color:lightgray;
   }
-  &.p1 .board_box:hover:before{
+  &.p1.active .board_box:hover:before{
     content:"X";
     color:lightcoral;
   }

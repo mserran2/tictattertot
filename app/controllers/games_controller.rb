@@ -41,8 +41,7 @@ class GamesController < ApplicationController
   end
 
   def join
-    if @game.status == Game::TYPES[:open]
-      @game.join(current_user)
+    if @game.join(current_user)
       redirect_to edit_game_path, :notice => 'Joined game successfully'
     else
       redirect_to games_path, :warning => 'This game is longer open. Please try another'
