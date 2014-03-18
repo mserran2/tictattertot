@@ -1,7 +1,7 @@
 <section id="player_info">
 <%= "#{game.player1.display_name} vs. #{game.player2.nil? ? 'Waiting for opponent' : game.player2.display_name} " %>
 </section>
-
+<div id="outcome"></div>
 <section id="game_board">
 <% game.grid.each_with_index do |row, i| %>
   <% row.each_with_index do |col, j| %>

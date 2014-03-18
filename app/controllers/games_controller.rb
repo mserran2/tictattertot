@@ -26,16 +26,15 @@ class GamesController < ApplicationController
   end
 
   def update
-    if @game.last_id == current_user.id
-      respond_to do |format|
-        format.html { redirect_to edit_game_path(@game), :notice => "It's not your turn yet!"}
-        format.json { render json: {:error => {:message => "It's not your turn yet!"}}, :status => 422 }
-      end
-    else
-      @game.move(current_user, params[:move])
+    if @game.last_id != current_user.id and @game.move(current_user, params[:move])
       respond_to do |format|
         format.html { redirect_to edit_game_path(@game)}
         format.json { render json: @game }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to edit_game_path(@game), :notice => "It's not your turn yet!"}
+        format.json { render json: {:error => {:message => "It's not your turn yet!"}}, :status => 422 }
       end
     end
   end
@@ -46,10 +45,6 @@ class GamesController < ApplicationController
     else
       redirect_to games_path, :warning => 'This game is longer open. Please try another'
     end
-  end
-
-  def move
-
   end
 
 end

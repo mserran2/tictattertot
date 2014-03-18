@@ -23,6 +23,11 @@ TicTT.processUpdate = (data)->
         surface.addClass("p#{data.start.color}")
       if data.game.next_token == surface.data('playtoken')
         surface.addClass("active")
+    when TicTT.status.ended
+      if data.game.last_token == surface.data('playtoken')
+        surface.find('#outcome').addClass('won')
+      else
+        surface.find('#outcome').addClass('loss')
 
 #setup click handler for boxes
 ready = ->

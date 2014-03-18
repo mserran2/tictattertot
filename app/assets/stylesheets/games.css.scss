@@ -10,6 +10,27 @@
     content:"X";
     color:lightcoral;
   }
+  #outcome{
+    border:1px solid #000;
+    width:600px;
+    margin:auto;
+    height:20px;
+    display: none;
+    &.won{
+      background-color: greenyellow;
+      display: block;
+      &:before{
+        content: 'You won this game';
+      }
+    }
+    &.loss{
+      background-color:indianred;
+      display: block;
+      &:before{
+        content: 'You lost this game'
+      }
+    }
+  }
   #game_board{
     max-width: 600px;
     margin: 0 auto;

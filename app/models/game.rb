@@ -25,6 +25,10 @@ class Game < ActiveRecord::Base
     self.last_color ? 1 : 0
   end
 
+  def stateColor
+    self.last_color ? 1 : -1
+  end
+
   def toggleColor
     self.last_color = !self.last_color
   end
@@ -50,6 +54,30 @@ class Game < ActiveRecord::Base
     self.player1 == player || self.player2 == player
   end
 
+  def updateState(x,y)
+    #check current color and update game state accordingly
+    self.state[:rows][x] += self.last_color ? 1 : -1
+    self.state[:columns][y] += self.last_color ? 1 : -1
+    #check if move is on a diagonals
+    if (x-y).abs == 2 or x*y == 1
+      #move is on diagonal 1
+      self.state[:diags][2] += self.last_color ? 1 : -1
+    end
+    if x-y == 0
+      #move is diagonal 0
+      self.state[:diags][0] += stateColor()
+    end
+  end
+
+  def checkWin(x,y)
+    if self.state[:rows][x].abs == 3 or
+        self.state[:columns][y].abs == 3 or
+        self.state[:diags][0].abs == 3 or
+        self.state[:diags][1].abs == 3
+      self.status = TYPES[:ended]
+    end
+  end
+
   def join(user)
     return false if self.status != TYPES[:open]
     self.player2 = user
@@ -70,17 +98,14 @@ class Game < ActiveRecord::Base
     self.last_id = user.id
     #update grid
     self.grid[x][y] = self.binColor
-    #check current color and update game state accordingly
-    if self.last_color
-      self.state[:rows][x] += 1
-      self.state[:columns][y] += 1
-    else
-      self.state[:rows][x] -= 1
-      self.state[:columns][y] -= 1
+    self.updateState(x, y)
+    self.checkWin(x,y)
+    if self.save
+      #send game update
+      sendUpdate(:move => move)
+      return self
     end
-    self.save
-    #send game update
-    sendUpdate(:move => move)
+    false
   end
 
   protected
