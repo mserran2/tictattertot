@@ -34,7 +34,11 @@ end
 
 gem 'devise'
 gem 'pusher'
-gem 'dalli'
+
+group :production do
+  gem 'memcachier'
+  gem 'dalli'
+end
 
 group :test do
   gem 'shoulda'
