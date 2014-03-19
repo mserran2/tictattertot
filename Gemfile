@@ -34,6 +34,7 @@ end
 
 gem 'devise'
 gem 'pusher'
+gem 'dalli'
 
 gem 'rails_12factor', group: :production
 
@@ -41,7 +42,7 @@ gem 'rails_12factor', group: :production
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development

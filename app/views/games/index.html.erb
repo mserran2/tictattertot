@@ -33,14 +33,18 @@
     <% end %>
   </div>
   <br/>
+  <% cache @recent_games do %>
   <div id="recent_games" class="game_group">
     <h2>Recently Ended Games</h2>
     <% @recent_games.each do |game| %>
+        <% cache game do %>
         <div class="game_thumb">
         <%= link_to game_path(game) do %>
             <%= render game %>
         <% end %>
         </div>
+        <% end %>
     <% end %>
   </div>
+  <% end %>
 </div>

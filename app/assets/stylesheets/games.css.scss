@@ -9,6 +9,10 @@
   border: 5px lightgrey solid;
   padding: 10px;
   border-style: dashed;
+  margin:5px;
+  h2{
+    margin-top:0;
+  }
 }
 .play_surface{
   &.p0.active .board_box:hover:before{
