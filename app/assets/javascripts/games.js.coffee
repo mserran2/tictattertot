@@ -12,7 +12,7 @@ TicTT.status =
 TicTT.processUpdate = (data)->
   #console.log(data)
   surface = $('.play_surface')
-  board = surface.find('#game_board')
+  board = $('#game_board')
   if data.move?
     board.children(".c#{data.move.x}#{data.move.y}").addClass("p#{data.game.binColor} locked")
 

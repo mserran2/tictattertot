@@ -2,15 +2,17 @@
 <%= "#{game.player1.display_name} vs. #{game.player2.nil? ? 'Waiting for opponent' : game.player2.display_name} " %>
 </section>
 <div id="outcome"></div>
-<section id="game_board">
+<section id="game_board" class="game_board">
 <% game.grid.each_with_index do |row, i| %>
   <% row.each_with_index do |col, j| %>
     <div class="board_box <%= "c#{i}#{j}"%> <%= "p#{col}" %>" data-x="<%= i %>" data-y="<%= j %>"></div>
   <% end %>
 <% end %>
 </section>
+<% if game.status <= Game::TYPES[:active] %>
 <script>
-    channel.bind('game_<%= @game.id %>', function(data) {
+    channel.bind('game_<%= game.id %>', function(data) {
         TicTT.processUpdate(data);
     });
 </script>
+<% end %>

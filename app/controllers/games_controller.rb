@@ -40,10 +40,13 @@ class GamesController < ApplicationController
   end
 
   def join
-    if @game.join(current_user)
+    if @game.player?(current_user)
+      redirect_to edit_game_path, :notice => "You're already in this game"
+    elsif @game.join(current_user)
       redirect_to edit_game_path, :notice => 'Joined game successfully'
     else
-      redirect_to games_path, :warning => 'This game is longer open. Please try another'
+      flash[:warning] = 'That game is no longer open. Please try another.'
+      redirect_to games_path
     end
   end
 

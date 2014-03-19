@@ -4,5 +4,5 @@
      data-playtoken="<%= current_user.token %>" data-gamepath="<%= game_path(@game) %>"
      data-player="<%= @game.userColor(current_user) %>" data-status="<%= @game.status %>"
      data-nexttoken="<%= @game.next_token %>">
-    <%= render :partial => 'game_board', :locals => {:game => @game} %>
+    <%= render @game, :locals => {:live => true} %>
 </div>

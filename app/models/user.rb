@@ -12,6 +12,10 @@ class User < ActiveRecord::Base
     "#{self.first_name.capitalize} #{self.last_name[0].upcase}."
   end
 
+  def fullname
+    "#{self.first_name.capitalize} #{self.last_name.capitalize}"
+  end
+
   def token
     Digest::SHA1.hexdigest "#{self.id}"
   end

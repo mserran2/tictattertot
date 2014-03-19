@@ -40,42 +40,60 @@
       }
     }
   }
-  #game_board{
-    max-width: 600px;
-    margin: 0 auto;
+}
 
-    .board_box{
-      width:198px;
-      height:198px;
-      border:1px solid #000;
-      float:left;
-      font-size: 133px;
-      text-align: center;
-      line-height: 200px;
-      cursor: pointer;
+#game_board{
+  max-width: 600px;
+  margin: 0 auto;
 
-      &.p1:before{
-        content: "X" !important;
-        color:maroon !important;
-        transition: all 0.5s ease;
-      }
-      &.p0:before{
-        content: "O" !important;
-        color:#000 !important;
-        transition: all 0.5s ease;
-      }
+  .board_box{
+    width:198px;
+    height:198px;
+    border:1px solid #000;
+    float:left;
+    font-size: 133px;
+    text-align: center;
+    line-height: 200px;
+    cursor: pointer;
+
+    &.p1:before{
+      content: "X" !important;
+      color:maroon !important;
+      transition: all 0.5s ease;
     }
-    .c00, .c01, .c02{
-      border-top-color: transparent;
-    }
-    .c00, .c10, .c20{
-      border-left-color: transparent;
-    }
-    .c02, .c12, .c22{
-      border-right-color:transparent;
-    }
-    .c20, .c21, .c22{
-      border-bottom-color:transparent;
+    &.p0:before{
+      content: "O" !important;
+      color:#000 !important;
+      transition: all 0.5s ease;
     }
   }
+  .c00, .c01, .c02{
+    border-top-color: transparent;
+  }
+  .c00, .c10, .c20{
+    border-left-color: transparent;
+  }
+  .c02, .c12, .c22{
+    border-right-color:transparent;
+  }
+  .c20, .c21, .c22{
+    border-bottom-color:transparent;
+  }
+}
+
+#recent_games{
+  .game_board{
+    width:120px;
+    .board_box{
+      width:38px;
+      height:38px;
+      line-height: 40px;
+      font-size:33px;
+   }
+  }
+}
+
+.game_thumb{
+  display: inline-block;
+  margin:5px;
 }
