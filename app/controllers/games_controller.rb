@@ -4,7 +4,7 @@ class GamesController < ApplicationController
 
   def index
     @open_games = Game.open
-    @recent_games = Game.recent
+    @recent_games = Game.completed.order(:updated_at).limit(5)
     @active_games = Game.active
   end
 

@@ -9,7 +9,7 @@ class Game < ActiveRecord::Base
 
   scope :open, -> { where(:status => TYPES[:open]) }
   scope :active, -> { where(:status => TYPES[:active]) }
-  scope :recent, -> { where('status >= ?', TYPES[:draw]).order(:updated_at).limit(5) }
+  scope :completed, -> { where('status >= ?', TYPES[:draw])}
 
   serialize :grid
   serialize :state
