@@ -1,8 +1,8 @@
 <div>
   <%= link_to link, 'data-gid' => game.id do %>
     <%= game.id %>
-    <%= (current_user.present? && game.player2_id == current_user.id ? 'Me' : game.player2.display_name) if game.player2.present? %>
+    <%= (current_user.present? && game.player2_id == current_user.id ? 'Me' : game.player2.displayName) if game.player2.present? %>
     Vs.
-    <%= current_user.present? && game.player1_id == current_user.id ? 'Me' : game.player1.display_name %>
+    <%= current_user.present? && game.player1_id == current_user.id ? 'Me' : game.player1.displayName %>
   <% end %>
 </div>

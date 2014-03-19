@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :hosted_games, :class_name => 'Game', :foreign_key => :player1_id
   has_many :joined_games, :class_name => 'Game', :foreign_key => :player2_id
 
-  def display_name
+  def displayName
     "#{self.first_name.capitalize} #{self.last_name[0].upcase}."
   end
 

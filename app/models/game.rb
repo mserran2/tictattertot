@@ -18,7 +18,7 @@ class Game < ActiveRecord::Base
   belongs_to :player2, :class_name => 'User', :foreign_key => 'player2_id'
 
   def displayName
-    "#{self.player1.display_name} vs. #{self.player2.display_name}"
+    "#{self.player1.displayName} vs. #{self.player2.displayName}"
   end
 
   def binColor

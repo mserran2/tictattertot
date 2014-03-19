@@ -1,17 +1,35 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  playerx_id: 1
-  playery_id: 1
-  game_grid: MyString
-  game_state: MyString
-  last_id: 1
-  active: false
+  player1_id: 1
+  player2_id: 2
+  grid: <%= [[1, -1, 1], [0, 0, 0], [-1, -1, 1]].to_yaml.inspect %>
+  state: <%= {:rows=>[2, -3, 1], :columns=>[0, -1, 1], :diags=>[1, 0, 0]}.to_yaml.inspect %>
+  last_id: 2
+  status: 3
+
 
 two:
-  playerx_id: 1
-  playery_id: 1
-  game_grid: MyString
-  game_state: MyString
+  player1_id: 2
+  player2_id: 1
+  grid: <%= [[1, -1, 1], [0, 0, 0], [-1, -1, 1]].to_yaml.inspect %>
+  state: <%= {:rows=>[2, -3, 1], :columns=>[0, -1, 1], :diags=>[1, 0, 0]}.to_yaml.inspect %>
   last_id: 1
-  active: false
+  status: 3
+
+three:
+  player1_id: 3
+  player2_id: 4
+  grid: <%= [[1, -1, 1], [0, 0, 0], [-1, -1, 1]].to_yaml.inspect %>
+  state: <%= {:rows=>[2, -3, 1], :columns=>[0, -1, 1], :diags=>[1, 0, 0]}.to_yaml.inspect %>
+  last_id: 2
+  status: 3
+
+
+four:
+  player1_id: 4
+  player2_id: 3
+  grid: <%= [[1, -1, 1], [0, 0, 0], [-1, -1, 1]].to_yaml.inspect %>
+  state: <%= {:rows=>[2, -3, 1], :columns=>[0, -1, 1], :diags=>[1, 0, 0]}.to_yaml.inspect %>
+  last_id: 1
+  status: 3

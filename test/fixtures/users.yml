@@ -1,7 +1,25 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  email: MyString
+mark:
+  id: 1
+  first_name: Mark
+  last_name: Serrano
+  email: csgeek@me.com
 
-two:
-  email: MyString
+nancy:
+  id: 2
+  first_name: Nancy
+  last_name: Mandujano
+  email: nmanduj@me.com
+
+karen:
+  id: 3
+  first_name: Karen
+  last_name: Avila
+  email: kavila@me.com
+
+kathy:
+  id: 4
+  first_name: Kathy
+  last_name: Avila
+  email: kkavila@me.com
