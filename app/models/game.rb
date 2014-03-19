@@ -64,7 +64,7 @@ class Game < ActiveRecord::Base
     #check if move is on a diagonals
     if (x-y).abs == 2 or x*y == 1
       #move is on diagonal 1
-      self.state[:diags][2] += self.last_color ? 1 : -1
+      self.state[:diags][1] += self.last_color ? 1 : -1
     end
     if x-y == 0
       #move is diagonal 0
