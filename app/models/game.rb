@@ -98,7 +98,7 @@ class Game < ActiveRecord::Base
     self.status = TYPES[:active]
     self.last_id = Random.rand(2).zero? ? self.player1_id : self.player2_id
     if self.save
-      sendUpdate(:start => {:displayName => self.displayName, :color => self.userColor(user)})
+      sendUpdate(:start => {:displayName => self.displayName})
       return self
     end
     false

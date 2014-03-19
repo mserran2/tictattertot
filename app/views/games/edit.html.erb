@@ -1,8 +1,7 @@
 
-<div class="play_surface <%= "p#{@game.userColor(current_user)}" %>
+<div class="play_surface <%= "p#{@game.userColor(current_user)}" if @game.status >= Game::TYPES[:active] %>
     <%= 'active' if @game.last_id != current_user.id and @game.status == Game::TYPES[:active] %>"
      data-playtoken="<%= current_user.token %>" data-gamepath="<%= game_path(@game) %>"
-     data-player="<%= @game.userColor(current_user) %>" data-status="<%= @game.status %>"
-     data-nexttoken="<%= @game.next_token %>">
+     data-player="<%= @game.userColor(current_user) %>" data-status="<%= @game.status %>">
     <%= render @game, :locals => {:live => true} %>
 </div>

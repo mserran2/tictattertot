@@ -19,7 +19,16 @@ TicTT.processUpdate = (data)->
     when TicTT.status.active
       if 'start' of data
         $('#player_info').text(data.start.displayName)
-        surface.addClass("p#{data.start.color}")
+        if data.game.last_token == surface.data('playtoken')
+          #this would mean the player goes second
+          surface.addClass("p#{data.game.binColor}")
+          surface.data('player', data.game.binColor)
+        else
+          #this would mean the player goes first
+          bincolor = Math.abs(data.game.binColor-1)
+          surface.addClass("p#{bincolor}")
+          surface.data('player', bincolor)
+
       if data.game.next_token == surface.data('playtoken')
         surface.addClass("active")
     when TicTT.status.draw
