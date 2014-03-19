@@ -1,7 +1,18 @@
 <section id="player_info">
 <%= "#{game.player1.displayName} vs. #{game.player2.nil? ? 'Waiting for opponent' : game.player2.displayName} " %>
 </section>
-<div id="outcome"></div>
+<% if current_user.present? and game.status == Game::TYPES[:ended] and game.last_id == current_user.id %>
+    <div id="outcome" class="win">You won this game!</div>
+<% elsif current_user.present? and game.player?(current_user) and game.status == Game::TYPES[:ended] %>
+    <div id="outcome" class="loss">You lost this game.</div>
+<% elsif game.status == Game::TYPES[:ended] %>
+    <div id="outcome" class="win"><%= game.last_user.displayName %> won this game!</div>
+<% elsif game.status == Game::TYPES[:draw] %>
+    <div id="outcome" class="draw">What a waste...</div>
+<% else %>
+    <div id="outcome"></div>
+<% end %>
+
 <section id="game_board" class="game_board">
 <% game.grid.each_with_index do |row, i| %>
   <% row.each_with_index do |col, j| %>

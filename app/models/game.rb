@@ -14,8 +14,11 @@ class Game < ActiveRecord::Base
   serialize :grid
   serialize :state
 
+  validates_presence_of(:player1, :grid, :state, :status)
+
   belongs_to :player1, :class_name => 'User', :foreign_key => 'player1_id'
   belongs_to :player2, :class_name => 'User', :foreign_key => 'player2_id'
+  belongs_to :last_user, :class_name => 'User', :foreign_key => 'last_id'
 
   def displayName
     "#{self.player1.displayName} vs. #{self.player2.displayName}"
@@ -84,6 +87,11 @@ class Game < ActiveRecord::Base
     end
   end
 
+  def isValid?(x,y)
+    #check is space is empty
+    self.grid[x][y] == -1
+  end
+
   def join(user)
     return false if self.status != TYPES[:open]
     self.player2 = user
@@ -97,8 +105,10 @@ class Game < ActiveRecord::Base
   end
 
   def move(user, move)
+    return false if self.status >= TYPES[:draw]
     x = Integer(move[:x])
     y = Integer(move[:y])
+    return false unless self.isValid?(x,y)
     #update current color and user id
     self.toggleColor
     self.last_id = user.id

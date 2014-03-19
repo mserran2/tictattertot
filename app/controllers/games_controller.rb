@@ -14,7 +14,7 @@ class GamesController < ApplicationController
 
   def create
     game = Game.create(:grid => Array.new(3) { Array.new(3,-1) },
-                :state => {:rows => Array.new(3, 0), :columns => Array.new(3, 0), :diags => Array.new(3, 0)},
+                :state => {:rows => Array.new(3, 0), :columns => Array.new(3, 0), :diags => Array.new(2, 0)},
                 :status => Game::TYPES[:open],
                 :player1 => current_user
     )

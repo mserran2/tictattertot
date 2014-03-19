@@ -10,7 +10,6 @@ TicTT.status =
   ended: 3
 
 TicTT.processUpdate = (data)->
-  #console.log(data)
   surface = $('.play_surface')
   board = $('#game_board')
   if data.move?
@@ -24,12 +23,12 @@ TicTT.processUpdate = (data)->
       if data.game.next_token == surface.data('playtoken')
         surface.addClass("active")
     when TicTT.status.draw
-      surface.find('#outcome').addClass('draw')
+      surface.find('#outcome').addClass('draw').text('What a waste...')
     when TicTT.status.ended
       if data.game.last_token == surface.data('playtoken')
-        surface.find('#outcome').addClass('win')
+        surface.find('#outcome').addClass('win').text('You rule supremely!')
       else
-        surface.find('#outcome').addClass('loss')
+        surface.find('#outcome').addClass('loss').text('You lost :(')
 
 #setup click handler for boxes
 ready = ->
@@ -45,7 +44,8 @@ ready = ->
       dataType: 'json'
     ).fail(->
       box.removeClass("p#{surface.data('player')}")
-      surface.removeClass('active')
+      surface.addClass('active')
+      alert('Could not compute. Please try refreshing.')
     ).done((data)->
       #console.log(data)
     )

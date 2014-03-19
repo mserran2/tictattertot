@@ -4,7 +4,7 @@ one:
   player1_id: 1
   player2_id: 2
   grid: <%= [[1, -1, 1], [0, 0, 0], [-1, -1, 1]].to_yaml.inspect %>
-  state: <%= {:rows=>[2, -3, 1], :columns=>[0, -1, 1], :diags=>[1, 0, 0]}.to_yaml.inspect %>
+  state: <%= {:rows=>[2, -3, 1], :columns=>[0, -1, 1], :diags=>[1, 0]}.to_yaml.inspect %>
   last_id: 2
   status: 3
 
@@ -13,7 +13,7 @@ two:
   player1_id: 2
   player2_id: 1
   grid: <%= [[1, -1, 1], [0, 0, 0], [-1, -1, 1]].to_yaml.inspect %>
-  state: <%= {:rows=>[2, -3, 1], :columns=>[0, -1, 1], :diags=>[1, 0, 0]}.to_yaml.inspect %>
+  state: <%= {:rows=>[2, -3, 1], :columns=>[0, -1, 1], :diags=>[1, 0]}.to_yaml.inspect %>
   last_id: 1
   status: 3
 
@@ -21,7 +21,7 @@ three:
   player1_id: 3
   player2_id: 4
   grid: <%= [[1, -1, 1], [0, 0, 0], [-1, -1, 1]].to_yaml.inspect %>
-  state: <%= {:rows=>[2, -3, 1], :columns=>[0, -1, 1], :diags=>[1, 0, 0]}.to_yaml.inspect %>
+  state: <%= {:rows=>[2, -3, 1], :columns=>[0, -1, 1], :diags=>[1, 0]}.to_yaml.inspect %>
   last_id: 2
   status: 3
 
@@ -29,7 +29,13 @@ three:
 four:
   player1_id: 4
   player2_id: 3
-  grid: <%= [[1, -1, 1], [0, 0, 0], [-1, -1, 1]].to_yaml.inspect %>
-  state: <%= {:rows=>[2, -3, 1], :columns=>[0, -1, 1], :diags=>[1, 0, 0]}.to_yaml.inspect %>
+  grid: <%= [[-1, -1, -1], [-1, -1, -1], [-1, -1, -1]].to_yaml.inspect %>
+  state: <%= {:rows=>[0, 0, 0], :columns=>[0, 0, 0], :diags=>[0, 0]}.to_yaml.inspect %>
   last_id: 1
-  status: 3
+  status: 1
+
+five:
+  player1_id: 4
+  grid: <%= [[-1, -1, -1], [-1, -1, -1], [-1, -1, -1]].to_yaml.inspect %>
+  state: <%= {:rows=>[0, 0, 0], :columns=>[0, 0, 0], :diags=>[0, 0]}.to_yaml.inspect %>
+  status: 0

@@ -36,6 +36,11 @@ gem 'devise'
 gem 'pusher'
 gem 'dalli'
 
+group :test do
+  gem 'shoulda'
+  gem 'capybara'
+end
+
 gem 'rails_12factor', group: :production
 
 # Use ActiveModel has_secure_password

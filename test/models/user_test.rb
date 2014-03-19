@@ -4,6 +4,10 @@ class UserTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
+  should validate_presence_of(:first_name)
+  should validate_presence_of(:last_name)
+  should validate_presence_of(:email)
+
   test 'can generate display name' do
     u = users(:mark)
     assert_equal "#{u.first_name.capitalize} #{u.last_name[0].upcase}.", u.displayName

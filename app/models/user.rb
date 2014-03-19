@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  validates_presence_of(:first_name, :last_name)
+
   has_many :hosted_games, :class_name => 'Game', :foreign_key => :player1_id
   has_many :joined_games, :class_name => 'Game', :foreign_key => :player2_id
 

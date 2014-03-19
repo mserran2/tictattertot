@@ -23,33 +23,25 @@
     content:"X";
     color:lightcoral;
   }
-  #outcome{
-    border:1px solid #000;
-    width:600px;
-    margin:auto;
-    height:20px;
-    display: none;
-    &.win, &.loss, &.draw{
-      display: block;
-    }
-    &.win{
-      background-color: greenyellow;
-      &:before{
-        content: 'You rule supremely!';
-      }
-    }
-    &.loss{
-      background-color:indianred;
-      &:before{
-        content: 'You lost :('
-      }
-    }
-    &.draw{
-      background-color: lightgray;
-      &:before{
-        content: 'Fiddlesticks! That was pointless.'
-      }
-    }
+}
+
+#outcome{
+  border:1px solid #000;
+  width:600px;
+  margin:auto;
+  height:20px;
+  display: none;
+  &.win, &.loss, &.draw{
+    display: block;
+  }
+  &.win{
+    background-color: greenyellow;
+  }
+  &.loss{
+    background-color:indianred;
+  }
+  &.draw{
+    background-color: lightgray;
   }
 }
 
@@ -107,4 +99,7 @@
 .game_thumb{
   display: inline-block;
   margin:5px;
+  #outcome{
+    display:none;
+  }
 }
