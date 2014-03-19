@@ -29,18 +29,25 @@
     margin:auto;
     height:20px;
     display: none;
-    &.won{
-      background-color: greenyellow;
+    &.win, &.loss, &.draw{
       display: block;
+    }
+    &.win{
+      background-color: greenyellow;
       &:before{
-        content: 'You won this game';
+        content: 'You rule supremely!';
       }
     }
     &.loss{
       background-color:indianred;
-      display: block;
       &:before{
-        content: 'You lost this game'
+        content: 'You lost :('
+      }
+    }
+    &.draw{
+      background-color: lightgray;
+      &:before{
+        content: 'Fiddlesticks! That was pointless.'
       }
     }
   }

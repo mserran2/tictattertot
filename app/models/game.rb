@@ -78,6 +78,12 @@ class Game < ActiveRecord::Base
     end
   end
 
+  def checkDraw
+    if self.turns >= 9
+      self.status = TYPES[:draw]
+    end
+  end
+
   def join(user)
     return false if self.status != TYPES[:open]
     self.player2 = user
@@ -98,8 +104,12 @@ class Game < ActiveRecord::Base
     self.last_id = user.id
     #update grid
     self.grid[x][y] = self.binColor
+    self.turns += 1
     self.updateState(x, y)
-    self.checkWin(x,y)
+    unless self.checkWin(x,y)
+      self.checkDraw
+    end
+
     if self.save
       #send game update
       sendUpdate(:move => move)

@@ -23,9 +23,11 @@ TicTT.processUpdate = (data)->
         surface.addClass("p#{data.start.color}")
       if data.game.next_token == surface.data('playtoken')
         surface.addClass("active")
+    when TicTT.status.draw
+      surface.find('#outcome').addClass('draw')
     when TicTT.status.ended
       if data.game.last_token == surface.data('playtoken')
-        surface.find('#outcome').addClass('won')
+        surface.find('#outcome').addClass('win')
       else
         surface.find('#outcome').addClass('loss')
 
@@ -47,6 +49,10 @@ ready = ->
     ).done((data)->
       #console.log(data)
     )
+
+  $('#open_games').on 'click', 'a', (e)->
+    unless confirm('Are you sure you want to join this game?')
+      e.preventDefault()
 
 #ensure compatibility with turbolinks
 $(document).ready(ready)
